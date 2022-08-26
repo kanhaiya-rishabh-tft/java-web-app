@@ -3,7 +3,7 @@ services:
   web:
     # image: rishabh7724/java-web-app
     image: nginx
-    build:
-      context: .
+    # build:
+    #   context: .
     ports:
       - "80:80"
