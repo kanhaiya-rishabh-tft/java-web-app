@@ -1,9 +1,9 @@
 x-aws-vpc: "vpc-02743c14dcda4ed49"
+x-aws-region: 'ap-south-1'
 services:
   web:
-    # image: rishabh7724/java-web-app
-    image: nginx
-    # build:
-    #   context: .
+    image: rishabh7724/java-web-app
+    build:
+      context: .
     ports:
-      - "80:80"
+      - "8090:8090"
