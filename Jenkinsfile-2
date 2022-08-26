@@ -44,7 +44,7 @@ pipeline {
             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
             ]]) {
             
-              sh 'docker context create ecs myecscontext --from-env'
+              //sh 'docker context create ecs myecscontext --from-env'
               sh 'docker context use myecscontext'
               sh 'docker-compose up'
               sh 'docker-compose ps --format json'
