@@ -11,8 +11,7 @@ pipeline {
     // $DOCKER_HUB_CREDS_PSW
     // $AWS_ACCESS_KEY_ID
     // $AWS_SECRET_ACCESS_KEY
-
-  }
+     AWS_DEFAULT_REGION = 'ap-south-1'
   stages {
     stage('Tooling versions') {
       steps {
@@ -36,11 +35,11 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        sh 'docker context create ecs myecscontext --from-env'
-        sh 'docker context use myecscontext'
-        sh 'docker-compose up'
-        sh 'docker-compose ps --format json'
-        sh 'docker context rm myecscontext'
+        sh 'sudo docker context create ecs myecscontext --from-env'
+        sh 'sudo docker context use myecscontext'
+        sh 'sudo docker-compose up'
+        sh 'sudo docker-compose ps --format json'
+        sh 'sudo docker context rm myecscontext'
       }
     }
   }
