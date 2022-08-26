@@ -42,7 +42,7 @@ pipeline {
             credentialsId: 'rishabh-admin',
             accessKeyVariable: 'AWS_ACCESS_KEY_ID',
             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-            ]]]) {
+            ]]) {
             
             sh 'docker context create ecs myecscontext --from-env'
             sh 'docker context use myecscontext'
