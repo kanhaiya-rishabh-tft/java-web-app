@@ -13,7 +13,7 @@ pipeline {
       steps {
         sh '''
           docker --version
-          docker compose version
+          docker-compose version
         '''
       }
     }
@@ -25,16 +25,16 @@ pipeline {
     stage('Build') {
       steps {
         sh 'docker context use default'
-        sh 'docker compose build'
-        sh 'docker compose push'
+        sh 'docker-compose build'
+        sh 'docker-compose push'
       }
     }
     stage('Deploy') {
       steps {
         sh 'docker context create ecs myecscontext --from-env'
         sh 'docker context use myecscontext'
-        sh 'docker compose up'
-        sh 'docker compose ps --format json'
+        sh 'docker-compose up'
+        sh 'docker-compose ps --format json'
         sh 'docker context rm myecscontext'
       }
     }
