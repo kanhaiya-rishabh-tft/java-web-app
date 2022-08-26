@@ -1,8 +1,9 @@
 x-aws-vpc: "vpc-02743c14dcda4ed49"
 services:
   web:
-    image: rishabh7724/java-web-app
+    # image: rishabh7724/java-web-app
+    image: nginx
     build:
       context: .
     ports:
-      - "8080:8080"
+      - "80:80"

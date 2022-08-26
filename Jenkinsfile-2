@@ -37,20 +37,19 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-         withCredentials([[
-            $class: 'AmazonWebServicesCredentialsBinding',
-            credentialsId: 'rishabh-admin',
-            accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-            ]]) {
-            
-              //sh 'docker context create ecs myecscontext --from-env'
-              sh 'docker context use myecscontext'
-              sh 'docker-compose up'
-              sh 'docker-compose ps --format json'
-              sh 'docker context rm myecscontext'
-        }
-        
+        withCredentials([[
+          $class: 'AmazonWebServicesCredentialsBinding',
+          credentialsId: 'rishabh-admin',
+          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+          ]]) {
+          
+            //sh 'docker context create ecs myecscontext --from-env'
+            sh 'docker context use myecscontext'
+            sh 'docker-compose up'
+            sh 'docker-compose ps --format json'
+            sh 'docker context rm myecscontext'
+          }
       }
     }
   }
