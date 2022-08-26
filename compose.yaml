@@ -1,5 +1,5 @@
 x-aws-vpc: "vpc-02743c14dcda4ed49"
-x-aws-region: 'ap-south-1'
+x-aws-region: 'us-east-1'
 services:
   web:
     image: rishabh7724/java-web-app:1.0
