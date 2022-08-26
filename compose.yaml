@@ -1,4 +1,4 @@
-x-aws-vpc: "vpc-02743c14dcda4ed49"
+x-aws-vpc: 'vpc-0c823bf69a1e0a2bf'
 x-aws-region: 'us-east-1'
 services:
   web:
