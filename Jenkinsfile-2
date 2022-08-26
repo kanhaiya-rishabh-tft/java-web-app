@@ -22,11 +22,6 @@ pipeline {
         '''
       }
     }
-    // stage('Unlock keychain') {
-    //   steps {
-    //     sh 'security -v unlock-keychain -p $KEYCHAIN_PASSWORD ~/Library/Keychains/login.keychain-db'
-    //   }
-    // }
     stage('Build') {
       steps {
         withCredentials([usernamePassword(credentialsId: 'docker-credential', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
@@ -45,19 +40,11 @@ pipeline {
           accessKeyVariable: 'AWS_ACCESS_KEY_ID',
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
           ]]) {
-          
-            //sh 'docker context create ecs myecscontext --from-env'
             sh 'docker context use myecscontext'
             sh 'docker compose up'
             sh 'docker compose ps --format json'
-            sh 'docker context rm myecscontext'
           }
       }
     }
   }
-  // post {
-  //   always {
-  //       sh 'security -v lock-keychain ~/Library/Keychains/login.keychain-db'
-  //   }
-  // }
 }
