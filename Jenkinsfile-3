@@ -1,0 +1,30 @@
+pipeline {
+  agent { 
+    label 'default' 
+  }
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '5'))
+  }
+  stages {
+    stage('Tooling versions') {
+      steps {
+        sh '''
+          docker --version > customfile.txt
+        ''' 
+      }
+    }
+  }
+  post {
+        always {
+            archiveArtifacts artifacts: 'customfile.txt', onlyIfSuccessful: true
+            
+            echo 'I will always say Hello again!'
+                
+            emailext attachLog: true, attachmentsPattern: 'customfile.txt',
+                body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
+                recipientProviders: [developers(), requestor()],
+                subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
+            
+        }
+    }
+}
